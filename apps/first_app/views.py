@@ -29,21 +29,22 @@ def checkout(request):
 def buy(request):
     price = 0.0
     quantity = float(request.POST['quantity'])
-    if request.POST['product_id'] == 'tshirt':
+    if request.POST['product_id'] == '1':
         price = 19.99 * quantity
     print(request.POST['product_id'])
-    if request.POST['product_id'] == 'sweater':
+    if request.POST['product_id'] == '2':
         price = 29.99 * quantity
-    if request.POST['product_id'] == 'cup':
+    if request.POST['product_id'] == '3':
         price = 4.99 * quantity
-    if request.POST['product_id'] == 'book':
+    if request.POST['product_id'] == '4':
         price = 49.99* quantity
     
-    print(price)
     request.session['price'] = price
     request.session['ordered_items'] += quantity
     request.session['total'] += price
     
     print(request.session['total'])
-    
     return redirect('/checkout')
+def clear(request):
+    request.session.clear()
+    return redirect('/')
